@@ -12,6 +12,7 @@ import com.lemoreiradev.listadetarefa.domain.repository.PessoaRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Objects;
@@ -38,6 +39,7 @@ public class PessoaService {
 
     }
 
+    @Transactional
     public PessoaDTO criar(PessoaDTO pessoaDTO) {
         Pessoa pessoa = Optional.ofNullable(pessoaRepository.findByCpf(pessoaDTO.getCpf()))
                 .orElse(null);
@@ -49,6 +51,7 @@ public class PessoaService {
         return PessoaMapper.toDTO(pessoaRepository.save(pessoa));
     }
 
+    @Transactional
     public PessoaDTO atualizar(PessoaDTO pessoaDTO, Long id){
         try {
             Optional<Pessoa> pessoa = pessoaRepository.findById(id);
@@ -65,6 +68,7 @@ public class PessoaService {
         }
     }
 
+    @Transactional
     public void excluir(Long id) {
         try {
             Optional<Pessoa> pessoa = pessoaRepository.findById(id);
@@ -75,6 +79,7 @@ public class PessoaService {
         }
     }
 
+    @Transactional
     public Contato criarContato(Contato contato, Long id) {
         Optional<Pessoa> pessoa = pessoaRepository.findById(id);
         if(pessoa.isEmpty()) {

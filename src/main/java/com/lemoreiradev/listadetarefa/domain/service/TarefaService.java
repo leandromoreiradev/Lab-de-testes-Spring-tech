@@ -13,6 +13,7 @@ import com.lemoreiradev.listadetarefa.domain.model.Tarefa;
 import com.lemoreiradev.listadetarefa.domain.repository.TarefaRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Objects;
@@ -25,6 +26,7 @@ public class TarefaService {
     private final PessoaService pessoaService;
     private final EnderecoClient enderecoClient;
 
+    @Transactional
     public TarefaDTO criar(TarefaDTO tarefaDTO, Long id, String cep) {
         PessoaDTO pessoa = pessoaService.buscarPessoa(id);
         EnderecoDTO enderecoDTO = enderecoClient.buscaEndereco(cep);
@@ -35,6 +37,8 @@ public class TarefaService {
         tarefaDTO.setPessoa(PessoaMapper.toModel(pessoa));
         return TarefaMapper.toDTO(tarefaRepository.save(TarefaMapper.toModel(tarefaDTO)));
     }
+
+    @Transactional
     public Tarefa atualizar(Tarefa tarefa, Long id) {
         try {
             tarefa = tarefaRepository.findById(id).get();
@@ -51,6 +55,7 @@ public class TarefaService {
         }
     }
 
+    @Transactional
     public void excluir(Long id) {
         try {
             Tarefa tarefa = tarefaRepository.findById(id).get();
