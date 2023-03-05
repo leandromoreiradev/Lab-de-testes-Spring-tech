@@ -2,12 +2,12 @@ package com.lemoreiradev.listadetarefa.domain.controller;
 
 import com.lemoreiradev.listadetarefa.domain.dto.PessoaDTO;
 import com.lemoreiradev.listadetarefa.domain.dto.TarefaDTO;
-import com.lemoreiradev.listadetarefa.domain.exceptions.PessoaNaoEncontradaException;
 import com.lemoreiradev.listadetarefa.domain.mapper.TarefaMapper;
 import com.lemoreiradev.listadetarefa.domain.model.Contato;
 import com.lemoreiradev.listadetarefa.domain.model.Tarefa;
 import com.lemoreiradev.listadetarefa.domain.service.PessoaService;
 import com.lemoreiradev.listadetarefa.domain.service.TarefaService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,7 +15,6 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
 import java.util.List;
-import java.util.Objects;
 import java.util.stream.Collectors;
 
 @RestController
@@ -62,8 +61,8 @@ public class PessoaController {
     }
 
     @PostMapping
-    public ResponseEntity<PessoaDTO> criarContato(@RequestBody PessoaDTO pessoaDTO) {
-        pessoaDTO = pessoaService.criar(pessoaDTO);
+    public ResponseEntity<PessoaDTO> criarPessoa(@Valid @RequestBody PessoaDTO pessoaDTO) {
+        pessoaDTO = pessoaService.criarPessoa(pessoaDTO);
         URI uri = ServletUriComponentsBuilder
                 .fromCurrentRequest()
                 .path("/{id}")

@@ -51,7 +51,7 @@ public class PessoaService {
     }
 
     @Transactional
-    public PessoaDTO criar(PessoaDTO pessoaDTO) {
+    public PessoaDTO criarPessoa(PessoaDTO pessoaDTO) {
         Pessoa pessoa = Optional.ofNullable(pessoaRepository.findByCpf(pessoaDTO.getCpf()))
                 .orElse(null);
         if (!Objects.isNull(pessoa)) {
