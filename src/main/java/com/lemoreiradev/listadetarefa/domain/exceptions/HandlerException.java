@@ -1,5 +1,6 @@
 package com.lemoreiradev.listadetarefa.domain.exceptions;
 
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

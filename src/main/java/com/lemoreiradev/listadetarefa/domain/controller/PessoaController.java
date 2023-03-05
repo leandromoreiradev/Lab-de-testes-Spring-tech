@@ -38,6 +38,12 @@ public class PessoaController {
         return ResponseEntity.ok(pessoa);
     }
 
+    @GetMapping("/buscar-por-nome")
+    public ResponseEntity<PessoaDTO> buscarPessoaPorNome(@RequestParam String nome) {
+        PessoaDTO pessoa = pessoaService.buscarPessoaPorNome(nome);
+        return ResponseEntity.ok(pessoa);
+    }
+
     @GetMapping("/{id}/tarefas")
     public ResponseEntity<List<TarefaDTO>> buscarTarefasPorPessoa(@PathVariable Long id) {
         List<Tarefa> tarefas = tarefaService.buscarTarefasPorPessoa(id);

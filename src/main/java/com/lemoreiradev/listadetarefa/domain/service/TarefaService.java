@@ -11,6 +11,7 @@ import com.lemoreiradev.listadetarefa.domain.mapper.TarefaMapper;
 import com.lemoreiradev.listadetarefa.domain.model.Pessoa;
 import com.lemoreiradev.listadetarefa.domain.model.Tarefa;
 import com.lemoreiradev.listadetarefa.domain.repository.TarefaRepository;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -50,7 +51,7 @@ public class TarefaService {
                     .build();
             return  tarefaRepository.save(tarefa);
 
-        } catch (Exception e) {
+        } catch (EntityNotFoundException e) {
             throw new TarefaNaoEncontrada("Não encontrado");
         }
     }
@@ -60,7 +61,7 @@ public class TarefaService {
         try {
             Tarefa tarefa = tarefaRepository.findById(id).get();
             tarefaRepository.deleteById(id);
-        } catch (Exception e) {
+        } catch (EntityNotFoundException e) {
             throw new TarefaNaoEncontrada("Não encontrado");
         }
     }
