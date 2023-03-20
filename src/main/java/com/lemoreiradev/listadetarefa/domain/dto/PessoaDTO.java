@@ -11,6 +11,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.io.Serializable;
 import java.util.List;
 
 @Data
@@ -18,7 +19,9 @@ import java.util.List;
 @NoArgsConstructor
 @Builder
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class PessoaDTO {
+public class PessoaDTO implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     private Long id;
     @NotBlank(message = "{name.not.blank}") //Não pode ser em branco, nem vazio, nem espaço em branco

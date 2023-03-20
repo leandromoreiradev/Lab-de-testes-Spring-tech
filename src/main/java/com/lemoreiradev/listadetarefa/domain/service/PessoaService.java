@@ -4,14 +4,17 @@ import com.lemoreiradev.listadetarefa.domain.dto.PessoaDTO;
 import com.lemoreiradev.listadetarefa.domain.exceptions.NegocioExeption;
 import com.lemoreiradev.listadetarefa.domain.exceptions.PessoaNaoEncontradaException;
 import com.lemoreiradev.listadetarefa.domain.mapper.PessoaMapper;
-import com.lemoreiradev.listadetarefa.domain.mapper.TarefaMapper;
 import com.lemoreiradev.listadetarefa.domain.model.Contato;
 import com.lemoreiradev.listadetarefa.domain.model.Pessoa;
 import com.lemoreiradev.listadetarefa.domain.repository.ContatoRepository;
 import com.lemoreiradev.listadetarefa.domain.repository.PessoaRepository;
-import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -29,12 +32,15 @@ public class PessoaService {
     private final ContatoRepository contatoRepository;
     private final BCryptPasswordEncoder passwordEncoder;
 
+
     public List<PessoaDTO> listar() {
         return pessoaRepository.findAll()
                 .stream().map(PessoaMapper::toDTO).collect(Collectors.toList());
     }
 
+
     public PessoaDTO buscarPessoa(Long id) {
+
         Optional<Pessoa> pessoa = Optional.ofNullable(pessoaRepository.findById(id)
                 .orElseThrow(() -> new PessoaNaoEncontradaException("Não encontrado")));
         return PessoaMapper.toDTO(pessoa.get());
@@ -50,6 +56,7 @@ public class PessoaService {
         return PessoaMapper.toDTO(pessoa);
     }
 
+
     @Transactional
     public PessoaDTO criarPessoa(PessoaDTO pessoaDTO) {
         Pessoa pessoa = Optional.ofNullable(pessoaRepository.findByCpf(pessoaDTO.getCpf()))
@@ -59,7 +66,8 @@ public class PessoaService {
         }
         pessoa = PessoaMapper.toModel(pessoaDTO);
         pessoa.setSenha(passwordEncoder.encode(pessoa.getSenha()));
-        return PessoaMapper.toDTO(pessoaRepository.save(pessoa));
+        pessoa = pessoaRepository.save(pessoa);;
+        return PessoaMapper.toDTO(pessoa);
     }
 
     @Transactional
@@ -76,6 +84,8 @@ public class PessoaService {
 
         return PessoaMapper.toDTO(pessoaRepository.save(pessoa.get()));
     }
+
+
 
     @Transactional
     public void excluir(Long id) {

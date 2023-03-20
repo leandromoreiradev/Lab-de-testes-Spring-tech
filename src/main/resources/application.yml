@@ -1,0 +1,29 @@
+
+#Database
+spring:
+  datasource:
+    username: root
+    url: jdbc:mysql://localhost:3306/lista-de-tarefa?createDatabaseIfNotExist=true&serverTimezone=UTC
+    password: root
+  jpa:
+    generate-ddl: 'true'
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL57Dialect
+    hibernate:
+      ddl-auto: create
+    show-sql: 'true'
+
+
+#Redis - Cache
+cache:
+  type: redis
+  redis:
+    host: localhost
+    port: 6379
+
+
+
+#Server port
+server:
+  port: '8888'

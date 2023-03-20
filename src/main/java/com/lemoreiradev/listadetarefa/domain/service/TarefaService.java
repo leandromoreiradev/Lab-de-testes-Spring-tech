@@ -8,17 +8,18 @@ import com.lemoreiradev.listadetarefa.domain.exceptions.PessoaNaoEncontradaExcep
 import com.lemoreiradev.listadetarefa.domain.exceptions.TarefaNaoEncontrada;
 import com.lemoreiradev.listadetarefa.domain.mapper.PessoaMapper;
 import com.lemoreiradev.listadetarefa.domain.mapper.TarefaMapper;
-import com.lemoreiradev.listadetarefa.domain.model.Pessoa;
 import com.lemoreiradev.listadetarefa.domain.model.Tarefa;
 import com.lemoreiradev.listadetarefa.domain.repository.TarefaRepository;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Objects;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class TarefaService {
