@@ -9,12 +9,7 @@ import com.lemoreiradev.listadetarefa.domain.model.Pessoa;
 import com.lemoreiradev.listadetarefa.domain.repository.ContatoRepository;
 import com.lemoreiradev.listadetarefa.domain.repository.PessoaRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.CacheEvict;
-import org.springframework.cache.annotation.CachePut;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.dao.EmptyResultDataAccessException;
-import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -35,7 +30,7 @@ public class PessoaService {
 
     public List<PessoaDTO> listar() {
         return pessoaRepository.findAll()
-                .stream().map(PessoaMapper::toDTO).collect(Collectors.toList());
+                .stream().map(PessoaMapper::toDTOresumido).collect(Collectors.toList());
     }
 
 
@@ -43,7 +38,7 @@ public class PessoaService {
 
         Optional<Pessoa> pessoa = Optional.ofNullable(pessoaRepository.findById(id)
                 .orElseThrow(() -> new PessoaNaoEncontradaException("Não encontrado")));
-        return PessoaMapper.toDTO(pessoa.get());
+        return PessoaMapper.toDTOdetalhado(pessoa.get());
 
     }
 
@@ -53,7 +48,7 @@ public class PessoaService {
         if (Objects.isNull(pessoa)) {
             throw new PessoaNaoEncontradaException("Não encontrado");
         }
-        return PessoaMapper.toDTO(pessoa);
+        return PessoaMapper.toDTOdetalhado(pessoa);
     }
 
 
@@ -67,7 +62,7 @@ public class PessoaService {
         pessoa = PessoaMapper.toModel(pessoaDTO);
         pessoa.setSenha(passwordEncoder.encode(pessoa.getSenha()));
         pessoa = pessoaRepository.save(pessoa);;
-        return PessoaMapper.toDTO(pessoa);
+        return PessoaMapper.toDTOresumido(pessoa);
     }
 
     @Transactional
@@ -82,7 +77,7 @@ public class PessoaService {
         pessoa.get().setSenha(passwordEncoder.encode(pessoaDTO.getSenha()));
         //pessoa.get().setTarefas(pessoaDTO.getTarefas().stream().map(tarefaDTO -> TarefaMapper.toModel(tarefaDTO)).collect(Collectors.toList()));
 
-        return PessoaMapper.toDTO(pessoaRepository.save(pessoa.get()));
+        return PessoaMapper.toDTOresumido(pessoaRepository.save(pessoa.get()));
     }
 
 

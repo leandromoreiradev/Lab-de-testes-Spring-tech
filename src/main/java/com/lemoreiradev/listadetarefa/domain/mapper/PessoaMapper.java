@@ -20,17 +20,26 @@ public class PessoaMapper {
                 .build();
     }
 
-    public static PessoaDTO toDTO(Pessoa pessoa) {
+    public static PessoaDTO toDTOresumido(Pessoa pessoa) {
         return PessoaDTO.builder()
                 .id(pessoa.getId())
                 .nome(pessoa.getNome())
                 .cpf(pessoa.getCpf())
                 .contato(pessoa.getContato())
-//                .tarefas(Optional.ofNullable(pessoa.getTarefas())
-//                        .map(tarefas -> tarefas.stream()
-//                                .map(TarefaMapper::toDTO)
-//                                .collect(Collectors.toList()))
-//                        .orElse(null))
+                .build();
+    }
+
+    public static PessoaDTO toDTOdetalhado(Pessoa pessoa) {
+        return PessoaDTO.builder()
+                .id(pessoa.getId())
+                .nome(pessoa.getNome())
+                .cpf(pessoa.getCpf())
+                .contato(pessoa.getContato())
+                .tarefas(Optional.ofNullable(pessoa.getTarefas())
+                        .map(tarefas -> tarefas.stream()
+                                .map(TarefaMapper::toDTO)
+                                .collect(Collectors.toList()))
+                        .orElse(null))
                 .build();
     }
 }
