@@ -1,9 +1,10 @@
 package com.lemoreiradev.listadetarefa.domain.config;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.context.annotation.Configuration;
 
-
+//@ConfigurationProperties tranforma elementos do propeties para obj java
+//prefix = "webservice.via-cep" é o prefixo onde tem as propriedades
+//Esta config esta ligada no feignConfig atraves do @EnableConfigurationProperties
 @ConfigurationProperties(prefix = "webservice.via-cep")
 public class ConfigProperties {
     private String name;
