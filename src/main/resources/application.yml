@@ -22,7 +22,19 @@ cache:
     host: localhost
     port: 6379
 
+webservice:
+  via-cep:
+    name: via-cep
+    url: https://viacep.com.br/ws
 
+#Log do feign
+logging:
+  level:
+    com:
+      lemoreiradev:
+        listadetarefa:
+          domain:
+            client: DEBUG
 
 #Server port
 server:
