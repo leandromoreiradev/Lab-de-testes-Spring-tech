@@ -1,7 +1,7 @@
 package com.lemoreiradev.listadetarefa.domain.service;
 
 import com.lemoreiradev.listadetarefa.domain.client.EnderecoClient;
-import com.lemoreiradev.listadetarefa.domain.config.properties.ConfigProperties;
+import com.lemoreiradev.listadetarefa.domain.config.properties.FeignConfigProperties;
 import com.lemoreiradev.listadetarefa.domain.dto.EnderecoDTO;
 import com.lemoreiradev.listadetarefa.domain.dto.PessoaDTO;
 import com.lemoreiradev.listadetarefa.domain.dto.TarefaDTO;
@@ -28,13 +28,13 @@ public class TarefaService {
     private final TarefaRepository tarefaRepository;
     private final PessoaService pessoaService;
     private final EnderecoClient enderecoClient;
-    private final ConfigProperties configProperties;
+    private final FeignConfigProperties feignConfigProperties;
 
     @Transactional
     public TarefaDTO criar(TarefaDTO tarefaDTO, Long id, String cep) {
         PessoaDTO pessoa = pessoaService.buscarPessoa(id);
-        log.info("Buscando endereço no service: {}, na url: {}", configProperties.getName(),
-                String.format("%s/%s/json/", configProperties.getUrl(), cep));
+        log.info("Buscando endereço no service: {}, na url: {}", feignConfigProperties.getName(),
+                String.format("%s/%s/json/", feignConfigProperties.getUrl(), cep));
         EnderecoDTO enderecoDTO = enderecoClient.buscaEndereco(cep);
         if(Objects.isNull(pessoa)) {
             throw new PessoaNaoEncontradaException("Não encontrado");

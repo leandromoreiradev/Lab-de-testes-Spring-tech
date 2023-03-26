@@ -6,14 +6,14 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 //prefix = "webservice.via-cep" é o prefixo onde tem as propriedades
 //Esta config esta ligada no feignConfig atraves do @EnableConfigurationProperties
 @ConfigurationProperties(prefix = "webservice.via-cep")
-public class ConfigProperties {
+public class FeignConfigProperties {
     private String name;
     private String url;
 
-    public ConfigProperties() {
+    public FeignConfigProperties() {
     }
 
-    public ConfigProperties(String name, String url) {
+    public FeignConfigProperties(String name, String url) {
         this.name = name;
         this.url = url;
     }
