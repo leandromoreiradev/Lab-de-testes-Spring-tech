@@ -1,5 +1,6 @@
 package com.lemoreiradev.listadetarefa.domain.controller.v1;
 
+import com.lemoreiradev.listadetarefa.domain.config.properties.data.TestOBJConfig;
 import com.lemoreiradev.listadetarefa.domain.config.properties.data.TextoJornada;
 import com.lemoreiradev.listadetarefa.domain.service.TextoHomeService;
 import lombok.RequiredArgsConstructor;
@@ -24,7 +25,7 @@ public class HomeController {
 
 
     @GetMapping("/teste")
-    public List<String> teste() {
-        return textoHomeService.teste();
+    public ResponseEntity<TestOBJConfig> teste() {
+        return ResponseEntity.ok(textoHomeService.teste());
     }
 }

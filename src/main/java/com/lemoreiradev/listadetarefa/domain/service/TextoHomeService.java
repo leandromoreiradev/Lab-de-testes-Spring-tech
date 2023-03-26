@@ -1,6 +1,7 @@
 package com.lemoreiradev.listadetarefa.domain.service;
 
 import com.lemoreiradev.listadetarefa.domain.config.properties.HomeProperties;
+import com.lemoreiradev.listadetarefa.domain.config.properties.data.TestOBJConfig;
 import com.lemoreiradev.listadetarefa.domain.config.properties.data.TextoJornada;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -17,7 +18,7 @@ public class TextoHomeService {
         return homeProperties.getTextos();
     }
 
-    public List<String> teste() {
-       return homeProperties.getTestes();
+    public TestOBJConfig teste() {
+       return homeProperties.getTestOBJConfig();
     }
 }

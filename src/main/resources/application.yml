@@ -53,12 +53,12 @@ home:
     - titulo: Suas tarefas em um só lugar
       subtitulo: OK vamos lá
 
-demo2:
-  testes:
-  - teste1
-  - teste2
 
-teste: sem lista
+objTest:
+  testOBJConfig:
+    nome: teste config
+
+
 
 
 demo:
