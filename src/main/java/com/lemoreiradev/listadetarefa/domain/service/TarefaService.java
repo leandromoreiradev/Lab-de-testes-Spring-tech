@@ -1,7 +1,7 @@
 package com.lemoreiradev.listadetarefa.domain.service;
 
 import com.lemoreiradev.listadetarefa.domain.client.EnderecoClient;
-import com.lemoreiradev.listadetarefa.domain.config.ConfigProperties;
+import com.lemoreiradev.listadetarefa.domain.config.properties.ConfigProperties;
 import com.lemoreiradev.listadetarefa.domain.dto.EnderecoDTO;
 import com.lemoreiradev.listadetarefa.domain.dto.PessoaDTO;
 import com.lemoreiradev.listadetarefa.domain.dto.TarefaDTO;

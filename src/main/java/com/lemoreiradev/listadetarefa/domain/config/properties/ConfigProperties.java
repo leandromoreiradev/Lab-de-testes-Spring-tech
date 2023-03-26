@@ -1,4 +1,4 @@
-package com.lemoreiradev.listadetarefa.domain.config;
+package com.lemoreiradev.listadetarefa.domain.config.properties;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 

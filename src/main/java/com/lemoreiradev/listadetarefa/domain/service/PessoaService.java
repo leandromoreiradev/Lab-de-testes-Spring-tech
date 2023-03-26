@@ -9,6 +9,9 @@ import com.lemoreiradev.listadetarefa.domain.model.Pessoa;
 import com.lemoreiradev.listadetarefa.domain.repository.ContatoRepository;
 import com.lemoreiradev.listadetarefa.domain.repository.PessoaRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -28,10 +31,12 @@ public class PessoaService {
     private final BCryptPasswordEncoder passwordEncoder;
 
 
+
     public List<PessoaDTO> listar() {
         return pessoaRepository.findAll()
                 .stream().map(PessoaMapper::toDTOresumido).collect(Collectors.toList());
     }
+
 
 
     public PessoaDTO buscarPessoa(Long id) {
@@ -64,6 +69,7 @@ public class PessoaService {
         pessoa = pessoaRepository.save(pessoa);;
         return PessoaMapper.toDTOresumido(pessoa);
     }
+
 
     @Transactional
     public PessoaDTO atualizar(PessoaDTO pessoaDTO, Long id) {

@@ -41,3 +41,28 @@ logging:
 #Server port
 server:
   port: '8888'
+
+
+#textos da home
+home:
+  textos:
+    - titulo: Bem vindo
+      subtitulo: Aqui voce pode criar tarefas
+    - titulo: Cria diversas tarefas
+      subtitulo: Seu dia-dia sob seu controle
+    - titulo: Suas tarefas em um só lugar
+      subtitulo: OK vamos lá
+
+demo2:
+  testes:
+  - teste1
+  - teste2
+
+teste: sem lista
+
+
+demo:
+  environment: prod
+  hosts:
+    - https://www.example1.com
+    - https://www.example2.com

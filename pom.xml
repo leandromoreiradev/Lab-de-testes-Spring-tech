@@ -61,6 +61,7 @@
 
 
 
+
 	</dependencies>
 	<!--Open feign-->
 	<dependencyManagement>

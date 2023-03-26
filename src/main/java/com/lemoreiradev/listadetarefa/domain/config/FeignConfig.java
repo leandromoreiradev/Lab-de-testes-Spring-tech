@@ -1,5 +1,6 @@
 package com.lemoreiradev.listadetarefa.domain.config;
 
+import com.lemoreiradev.listadetarefa.domain.config.properties.ConfigProperties;
 import feign.Logger;
 import feign.RequestInterceptor;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
