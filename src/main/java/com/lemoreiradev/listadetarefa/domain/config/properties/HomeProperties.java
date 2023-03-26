@@ -8,7 +8,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 
 import java.util.List;
 
-@Slf4j
+
 @Data
 @ConfigurationProperties(prefix = "home") //home é o prefixo que antecede a prorpriedade textos la no application.yml
 //@ConfigurationProperties(prefix = "obj-test") //no properties yml objTest equivale a obj-test no obj java tem que usar o "-"
