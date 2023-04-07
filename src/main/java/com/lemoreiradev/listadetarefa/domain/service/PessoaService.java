@@ -31,6 +31,7 @@ public class PessoaService {
     private final PessoaRepository pessoaRepository;
     private final ContatoRepository contatoRepository;
     private final BCryptPasswordEncoder passwordEncoder;
+    private final EmailService emailService;
 
     public static final String INDEX_PESSOAS = "pessoas";
 
@@ -82,7 +83,8 @@ public class PessoaService {
         }
         pessoa = PessoaMapper.toModel(pessoaDTO);
         pessoa.setSenha(passwordEncoder.encode(pessoa.getSenha()));
-        pessoa = pessoaRepository.save(pessoa);;
+        pessoa = pessoaRepository.save(pessoa);
+        emailService.notificar(pessoa);
         return PessoaMapper.toDTOresumido(pessoa);
     }
 

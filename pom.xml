@@ -73,12 +73,24 @@
 		</dependency>
 
 
+		<!--Email-->
+		<!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-mail -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-mail</artifactId>
+			<version>3.0.5</version>
+		</dependency>
+
+
+
 		<!--ElasticStack-->
 		<dependency>
 			<groupId>net.logstash.logback</groupId>
 			<artifactId>logstash-logback-encoder</artifactId>
 			<version>7.2</version>
 		</dependency>
+
+
 
 	</dependencies>
 	<!--Open feign-->

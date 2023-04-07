@@ -22,7 +22,37 @@ spring:
     host: localhost
     port: 6379
 
+#Config de email com mailtrap
+  mail:
+    host: sandbox.smtp.mailtrap.io
+    port: 2525
+    username: 2ba8345a7a250c
+    password: 9dd974086cf36c
+    properties:
+      mail:
+        transport:
+          protocol: smtp
+        debug: ture
+        smtp:
+          auth: true #Aqui depende do servidor de email, muda em ambiente de produção
+          starttls:
+            enable: true
 
+#USANDO GOOGLE
+#  mail:
+#    host: smtp.gmail.com
+#    port: 587
+#    protocol: smtp
+#    username: leandrodev.oliveira@gmail.com
+#    password: kekhrwqclaiktorg
+#    properties:
+#      mail:
+#        smtp:
+#          auth: true
+#          starttls:
+#            enable: true
+#            required: true
+#          quitwait: false
 
 webservice:
   via-cep:
@@ -57,4 +87,5 @@ home:
 objTest:
   testOBJConfig:
     nome: teste config
+
 
