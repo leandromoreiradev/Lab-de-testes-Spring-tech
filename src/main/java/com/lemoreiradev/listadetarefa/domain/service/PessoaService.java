@@ -69,6 +69,7 @@ public class PessoaService {
         if (Objects.isNull(pessoa)) {
             throw new PessoaNaoEncontradaException("Não encontrado");
         }
+        log.info("BUSCANDO PESSOA POR NOME ::: Estamos buscando a pessoa {}", pessoa.getNome());
         return PessoaMapper.toDTOdetalhado(pessoa);
     }
 
