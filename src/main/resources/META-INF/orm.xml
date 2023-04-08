@@ -7,9 +7,9 @@
 
     <named-query name="Pessoa.findPessoaPorNomeIgnoreCaseContaining">
         <query>
-            from Pessoa
-            where nome = :nome
+            SELECT p
+            FROM Pessoa p
+            WHERE p.nome = :nome
         </query>
     </named-query>
-
 </entity-mappings>
