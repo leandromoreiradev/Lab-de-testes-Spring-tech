@@ -24,7 +24,7 @@ public class Tarefa {
     private EnderecoDTO endereco;
     @ManyToOne
     @JoinColumn(name = "pessoa_id")
-    private Pessoa pessoa; //relacionamento muitos para um, unidirecional
+    private Pessoa pessoa; //Relação bidirecional com pessoa
     //no mapeamento n -> 1 ou 1 -> n sempre começar do lado do n -> 1 e add a FK chave estrangeira,
     //que é o valor da chave primaria em Pessoa
 
