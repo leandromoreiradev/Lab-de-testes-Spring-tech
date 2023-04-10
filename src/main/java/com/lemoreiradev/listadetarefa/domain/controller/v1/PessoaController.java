@@ -2,6 +2,7 @@ package com.lemoreiradev.listadetarefa.domain.controller.v1;
 
 import com.lemoreiradev.listadetarefa.domain.dto.PessoaDTO;
 import com.lemoreiradev.listadetarefa.domain.dto.TarefaDTO;
+import com.lemoreiradev.listadetarefa.domain.dto.TarefaUpdateDTO;
 import com.lemoreiradev.listadetarefa.domain.mapper.TarefaMapper;
 import com.lemoreiradev.listadetarefa.domain.model.Contato;
 import com.lemoreiradev.listadetarefa.domain.model.Tarefa;
@@ -11,6 +12,7 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.CacheControl;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -54,6 +56,30 @@ public class PessoaController {
         return ResponseEntity.ok().cacheControl(CacheControl.maxAge(10, TimeUnit.SECONDS)).body(tarefas.stream().map(TarefaMapper::toDTO).collect(Collectors.toList()));
     }
 
+    @PostMapping("/{id}/{cep}/tarefas")
+    public ResponseEntity<TarefaDTO> criarTarefa(@RequestBody TarefaDTO tarefaDTO, @PathVariable Long id, @PathVariable String cep) {
+        tarefaDTO = tarefaService.criar(tarefaDTO, id, cep);
+        URI uri = ServletUriComponentsBuilder
+                .fromCurrentRequest()
+                .path("/{id}")
+                .buildAndExpand(tarefaDTO.getId())
+                .toUri();
+        return ResponseEntity.created(uri).body(tarefaDTO);
+    }
+
+    @PutMapping("/{id}/tarefas/{idTarefa}")
+    public ResponseEntity<Boolean> atualizarTarefa(@PathVariable Long id, @RequestBody TarefaUpdateDTO tarefaUpdateDTO, @PathVariable Long idTarefa ) {
+        Boolean statusTarefa = tarefaService.atualizarTarefa(id, tarefaUpdateDTO, idTarefa);
+        return ResponseEntity.ok(statusTarefa);
+    }
+
+
+    @DeleteMapping("/{id}/tarefas/{idTarefa}")
+    public ResponseEntity<Boolean> excluirTarefa(@PathVariable Long idTarefa) {
+        Boolean statusTarefa = tarefaService.excluir(idTarefa);
+        return ResponseEntity.ok(statusTarefa);
+    }
+
     @PostMapping("/{id}/contatos")
     public ResponseEntity<Contato> criarContato(@RequestBody Contato contato, @PathVariable Long id) {
         contato = pessoaService.criarContato(contato, id);
@@ -76,22 +102,14 @@ public class PessoaController {
         return ResponseEntity.created(uri).body(pessoaDTO);
     }
 
-    @PostMapping("/{id}/{cep}/tarefas")
-    public ResponseEntity<TarefaDTO> criarTarefa(@RequestBody TarefaDTO tarefaDTO, @PathVariable Long id, @PathVariable String cep) {
-        tarefaDTO = tarefaService.criar(tarefaDTO, id, cep);
-        URI uri = ServletUriComponentsBuilder
-                .fromCurrentRequest()
-                .path("/{id}")
-                .buildAndExpand(tarefaDTO.getId())
-                .toUri();
-        return ResponseEntity.created(uri).body(tarefaDTO);
-    }
 
     @PutMapping("/{id}")
     public ResponseEntity<PessoaDTO> atualizar(@RequestBody PessoaDTO pessoaDTO, @PathVariable Long id) {
         pessoaDTO = pessoaService.atualizar(pessoaDTO, id);
         return ResponseEntity.ok(pessoaDTO) ;
     }
+
+
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> excluir(@PathVariable Long id) {

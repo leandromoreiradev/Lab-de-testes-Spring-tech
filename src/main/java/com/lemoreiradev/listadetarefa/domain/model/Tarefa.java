@@ -1,7 +1,5 @@
 package com.lemoreiradev.listadetarefa.domain.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.lemoreiradev.listadetarefa.domain.dto.EnderecoDTO;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

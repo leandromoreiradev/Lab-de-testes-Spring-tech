@@ -25,8 +25,7 @@ public class Pessoa {
     @OneToOne(mappedBy = "pessoa")
     private Contato contato; //Relacionamento um para um bidirecional pois mapeamos aqui com o  @OneToOne(mappedBy = "pessoa")
 
-//    Aqui temos uma relação 1 -> n porem unidirecional pois não anotamos desse lado,
-//    apenas do lado da Tarefa, caso anotassemos aqui seria bidirecional e ficaria assim:
+    //Relação bifirecional com tarefa
     @OneToMany(mappedBy = "pessoa")
     private List<Tarefa> tarefas;
 }
