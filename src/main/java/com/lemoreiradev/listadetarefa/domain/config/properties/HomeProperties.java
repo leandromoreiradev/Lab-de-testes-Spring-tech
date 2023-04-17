@@ -18,7 +18,4 @@ public class HomeProperties {
 
     private TestOBJConfig testOBJConfig;
 
-
-
-
 }

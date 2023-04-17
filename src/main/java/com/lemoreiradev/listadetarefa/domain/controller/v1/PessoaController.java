@@ -80,6 +80,8 @@ public class PessoaController {
         return ResponseEntity.ok(statusTarefa);
     }
 
+
+    //Isolar para um service para recurso contato
     @PostMapping("/{id}/contatos")
     public ResponseEntity<Contato> criarContato(@RequestBody Contato contato, @PathVariable Long id) {
         contato = pessoaService.criarContato(contato, id);

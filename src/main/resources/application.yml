@@ -88,4 +88,10 @@ objTest:
   testOBJConfig:
     nome: teste config
 
+#lista de erros
+errosFront:
+  erros:
+    - erro: Erro 01
+    - erro: Erro 02
+    - erro: Erro 03
 

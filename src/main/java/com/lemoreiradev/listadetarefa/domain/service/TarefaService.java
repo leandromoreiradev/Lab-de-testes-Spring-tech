@@ -20,8 +20,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Objects;
-import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Slf4j
 @Service
@@ -39,7 +37,7 @@ public class TarefaService {
         log.info("Buscando endereço no service: {}, na url: {}", feignConfigProperties.getName(),
                 String.format("%s/%s/json/", feignConfigProperties.getUrl(), cep));
         EnderecoDTO enderecoDTO = enderecoClient.buscaEndereco(cep);
-        if(Objects.isNull(pessoa)) {
+        if (Objects.isNull(pessoa)) {
             throw new PessoaNaoEncontradaException("Não encontrado");
         }
         tarefaDTO.setEndereco(enderecoDTO);
@@ -49,7 +47,7 @@ public class TarefaService {
 
     public List<Tarefa> buscarTarefasPorPessoa(Long id) {
         PessoaDTO pessoa = pessoaService.buscarPessoa(id);
-        if(Objects.isNull(pessoa)) {
+        if (Objects.isNull(pessoa)) {
             throw new PessoaNaoEncontradaException("Não encontrada");
         }
         return tarefaRepository.findByPessoaId(id);
@@ -61,12 +59,12 @@ public class TarefaService {
 
         var tarefas = tarefaRepository.findByPessoaId(id);
 
-        if(tarefas.isEmpty()){
+        if (tarefas.isEmpty()) {
             throw new TarefaNaoEncontrada("Tarefa não encontrada");
         }
 
         Tarefa tarefa = tarefas.stream()
-                .filter( t -> t.getId().equals(idTarefa)).findFirst().get();
+                .filter(t -> t.getId().equals(idTarefa)).findFirst().get();
         tarefa.setIsCompleta(statusTarefa);
         tarefa = tarefaRepository.save(tarefa);
         statusTarefa = tarefa.getIsCompleta();

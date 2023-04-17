@@ -118,6 +118,7 @@ public class PessoaService {
         }
     }
 
+    //Isolar para um service para recurso contato
     @Transactional
     public Contato criarContato(Contato contato, Long id) {
         Optional<Pessoa> pessoa = pessoaRepository.findById(id);

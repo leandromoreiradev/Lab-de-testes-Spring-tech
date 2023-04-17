@@ -26,6 +26,8 @@ public class Pessoa {
     private Contato contato; //Relacionamento um para um bidirecional pois mapeamos aqui com o  @OneToOne(mappedBy = "pessoa")
 
     //Relação bidirecional com tarefa
-    @OneToMany(mappedBy = "pessoa")
+    //cascade = CascadeType.ALL siginifica que toda operação(CRUD) feita em Pessoa
+    //se propagará para seu relacionamento com a tabela tarefa
+    @OneToMany(mappedBy = "pessoa", cascade = CascadeType.ALL)
     private List<Tarefa> tarefas;
 }
